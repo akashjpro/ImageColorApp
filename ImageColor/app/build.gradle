@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id  'dagger.hilt.android.plugin'
 }
 
 android {
@@ -33,12 +36,72 @@ android {
 }
 
 dependencies {
+    
+    // ==================================== KOTLIN =================================================
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kt_reflection_version"
+
+    // ==================================== COROUTINES =================================================
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kt_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kt_coroutines_version"
+
+    // ================================== ANDROID X ================================================
+
+    implementation "androidx.core:core-ktx:$ktx_core_version"
+    implementation "androidx.activity:activity-ktx:$ktx_activity_version"
+    implementation "androidx.collection:collection-ktx:$ktx_collection_version"
+    implementation "androidx.fragment:fragment-ktx:$ktx_fragment_version"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$ktx_navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$ktx_navigation_version"
+
+    // Life cycle
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+
+    // ================================== MATERIAL LIBRARY =========================================
+
+    implementation "com.google.android.material:material:$material_version"
+
+    // ==================================== HILT ===================================================
+
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
+
+    // ==================================== RETROFIT ===============================================
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-jackson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_logging_version"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
+
+    // ====================================== LOGGING ==============================================
+
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    // ====================================== GLIDE ================================================
+
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation("com.github.bumptech.glide:recyclerview-integration:$glide_version") {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
+
+    // Recycler view
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+
+    // For control over item selection of both touch and mouse driven selection
+    implementation "androidx.recyclerview:recyclerview-selection:$recyclerview_selection_version"
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
